@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Portfolio | AGH Student</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00ffff;
+            --secondary: #ff00ff;
+            --accent: #7c3aed;
+            --dark: #0a0a0f;
+            --darker: #050508;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--darker);
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a0a2e 50%, #0a0a0f 100%);
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .glowing-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .orb1 {
+            top: 10%;
+            left: 20%;
+            width: 400px;
+            height: 400px;
+            background: var(--primary);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb2 {
+            bottom: 10%;
+            right: 20%;
+            width: 500px;
+            height: 500px;
+            background: var(--secondary);
+            animation: float 15s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(50px, 50px); }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 4rem 0;
+        }
+
+        .hero {
+            position: relative;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero .tagline {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--dark);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.3s;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 255, 255, 0.2);
+            border-color: var(--primary);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 3rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-item {
+            padding: 0.8rem;
+            margin-bottom: 0.8rem;
+            background: rgba(0, 255, 255, 0.05);
+            border-left: 3px solid var(--primary);
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .skill-item:hover {
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateX(10px);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .project-card p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            padding: 0.4rem 1rem;
+            background: rgba(124, 58, 237, 0.2);
+            border: 1px solid var(--accent);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--primary);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .contact-item a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-item a:hover {
+            color: var(--secondary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--darker);
+            border-top: 1px solid var(--glass);
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .glass-card {
+                padding: 1.5rem;
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-20px); }
+            60% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .profile-image {
+            width: 100%;
+            max-width: 300px;
+            height: 300px;
+            border-radius: 20px;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .profile-image {
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+    <div class="glowing-orb orb1"></div>
+    <div class="glowing-orb orb2"></div>
+
+    <nav>
+        <div class="container">
+            <div class="logo">CYBER.SEC</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">O mnie</a></li>
+                <li><a href="#skills">Umiejętności</a></li>
+                <li><a href="#projects">Projekty</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Cybersecurity Enthusiast</h1>
+            <p class="subtitle">Student AGH | Ethical Hacker | Security Researcher</p>
+            <p class="tagline">🔐 Zabezpieczanie cyfrowego świata, jeden kod na raz</p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">Zobacz Projekty</a>
+                <a href="#contact" class="btn btn-outline">Kontakt</a>
+            </div>
+            <div class="scroll-indicator">
+                <svg width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 5 L15 25 M10 20 L15 25 L20 20" stroke="var(--primary)"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">O mnie</h2>
+            <div class="glass-card">
+                <div class="about-content">
+                    <div>
+                        <!-- Możesz dodać swoje zdjęcie: <img src="assets/profile.jpg" alt="Profile" class="profile-image"> -->
+                        <div class="profile-image" style="background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            👨‍💻
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.8rem;">Student Cyberbezpieczeństwa | AGH</h3>
+                        <p style="margin-bottom: 1rem; font-size: 1.1rem; line-height: 1.8;">
+                            Jestem studentem pierwszego roku <strong>cyberbezpieczeństwa</strong> na <strong>AGH w Krakowie</strong>. 
+                            Fascynuje mnie ochrona systemów i danych, a każdy dzień to nowa okazja do nauki i doskonalenia umiejętności w dziedzinie security.
+                        </p>
+                        <p style="margin-bottom: 1rem; font-size: 1.1rem; line-height: 1.8;">
+                            Specjalizuję się w <strong>ethical hackingu</strong>, testach penetracyjnych i automatyzacji bezpieczeństwa. 
+                            Regularnie uczestniczę w <strong>CTF-ach</strong> i eksperymentuję z narzędziami takimi jak Metasploit, Burp Suite i Wireshark.
+                        </p>
+                        <p style="font-size: 1.1rem; line-height: 1.8; color: var(--primary);">
+                            🎯 <strong>Cel:</strong> Zostać ekspertem w penetration testingu i security research
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Umiejętności</h2>
+            <div class="skills-grid">
+                <div class="glass-card skill-category">
+                    <h3>🔧 Cybersecurity Tools</h3>
+                    <div class="skill-item">Wireshark - analiza ruchu sieciowego</div>
+                    <div class="skill-item">Metasploit - framework penetracyjny</div>
+                    <div class="skill-item">Burp Suite - testowanie aplikacji web</div>
+                    <div class="skill-item">Nmap - skanowanie sieci</div>
+                    <div class="skill-item">Hydra - ataki brute-force</div>
+                </div>
+
+                <div class="glass-card skill-category">
+                    <h3>💻 Programowanie</h3>
+                    <div class="skill-item">Python - skrypty bezpieczeństwa</div>
+                    <div class="skill-item">Bash - automatyzacja</div>
+                    <div class="skill-item">SQL - bezpieczeństwo baz danych</div>
+                    <div class="skill-item">JavaScript - security web apps</div>
+                </div>
+
+                <div class="glass-card skill-category">
+                    <h3>🖥️ Systemy & Networking</h3>
+                    <div class="skill-item">Linux/Ubuntu - administracja</div>
+                    <div class="skill-item">Windows - forensics</div>
+                    <div class="skill-item">VMware - środowiska testowe</div>
+                    <div class="skill-item">TCP/IP, DNS, VPN</div>
+                </div>
+
+                <div class="glass-card skill-category">
+                    <h3>🛡️ Security Practices</h3>
+                    <div class="skill-item">Penetration Testing</div>
+                    <div class="skill-item">Vulnerability Scanning</div>
+                    <div class="skill-item">Kryptografia</div>
+                    <div class="skill-item">OWASP Top 10</div>
+                    <div class="skill-item">Incident Response</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Projekty</h2>
+            <div class="projects-grid">
+                <div class="glass-card project-card">
+                    <h3>🔐 Secure Password Manager</h3>
+                    <p>Menedżer haseł z szyfrowaniem AES-256, implementujący najlepsze praktyki bezpieczeństwa. Projekt zawiera generowanie silnych haseł oraz bezpieczne przechowywanie danych.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">AES</span>
+                        <span class="tech-tag">Cryptography</span>
+                    </div>
+                </div>
+
+                <div class="glass-card project-card">
+                    <h3>🎯 Penetration Testing Lab</h3>
+                    <p>Środowisko testowe do przeprowadzania symulacji ataków na wirtualnych maszynach. Scenariusze obejmują SQL injection, XSS, CSRF i inne podatności OWASP.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Metasploit</span>
+                        <span class="tech-tag">VMware</span>
+                        <span class="tech-tag">Kali Linux</span>
+                    </div>
+                </div>
+
+                <div class="glass-card project-card">
+                    <h3>🤖 Security Automation Scripts</h3>
+                    <p>Zestaw skryptów Python automatyzujących zadania security: skanowanie portów, analiza logów, detekcja anomalii w ruchu sieciowym oraz monitoring podatności.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Nmap</span>
+                        <span class="tech-tag">Bash</span>
+                    </div>
+                </div>
+
+                <div class="glass-card project-card">
+                    <h3>🌐 Web Vulnerability Scanner</h3>
+                    <p>Narzędzie do automatycznego skanowania aplikacji webowych pod kątem powszechnych podatności (XSS, SQLi, CSRF). Generuje szczegółowe raporty z rekomendacjami.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">OWASP</span>
+                        <span class="tech-tag">BeautifulSoup</span>
+                    </div>
+                </div>
+
+                <div class="glass-card project-card">
+                    <h3>📡 Network Traffic Analyzer</h3>
+                    <p>Analizator ruchu sieciowego wykrywający podejrzane pakiety, skanowania portów i potencjalne ataki DDoS. Wizualizacja danych w czasie rzeczywistym.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Wireshark</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Scapy</span>
+                    </div>
+                </div>
+
+                <div class="glass-card project-card">
+                    <h3>🔑 CTF Writeups & Solutions</h3>
+                    <p>Dokumentacja rozwiązań z różnych konkursów CTF. Zawiera analizy technik exploitacji, reverse engineeringu oraz kryptografii stosowanych w wyzwaniach.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">CTF</span>
+                        <span class="tech-tag">Forensics</span>
+                        <span class="tech-tag">Reverse Eng</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Kontakt</h2>
+            <p style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem; color: rgba(255,255,255,0.8);">
+                Szukasz współpracownika do projektu security lub chcesz porozmawiać o cyberbezpieczeństwie?
+            </p>
+            <div class="contact-grid">
+                <div class="glass-card contact-item">
+                    <div class="contact-icon">📧</div>
+                    <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Email</h3>
+                    <a href="mailto:twoj.email@example.com">twoj.email@example.com</a>
+                </div>
+
+                <div class="glass-card contact-item">
+                    <div class="contact-icon">💼</div>
+                    <h3 style="color: var(--primary); margin-bottom: 0.5rem;">LinkedIn</h3>
+                    <a href="https://linkedin.com/in/twojprofil" target="_blank">linkedin.com/in/twojprofil</a>
+                </div>
+
+                <div class="glass-card contact-item">
+                    <div class="contact-icon">🐙</div>
+                    <h3 style="color: var(--primary); margin-bottom: 0.5rem;">GitHub</h3>
+                    <a href="https://github.com/Hose-Zur" target="_blank">github.com/Hose-Zur</a>
+                </div>
+
+                <div class="glass-card contact-item">
+                    <div class="contact-icon">🐦</div>
+                    <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Twitter</h3>
+                    <a href="https://twitter.com/twojhandle" target="_blank">@twojhandle</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p style="color: rgba(255,255,255,0.6);">© 2025 Cybersecurity Portfolio | Zbudowane z 💜 i ☕</p>
+        <p style="color: var(--primary); margin-top: 0.5rem;">Hose-Zur @ AGH University of Science and Technology</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(50px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
