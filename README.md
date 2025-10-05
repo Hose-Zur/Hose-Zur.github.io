@@ -2,7 +2,7 @@
 
 Welcome to my GitHub profile! I am a first-year cybersecurity student at **AGH University of Science and Technology**, passionate about learning and applying cybersecurity principles to protect systems and data.
 
-## About Me
+## About Me:
 
 - **Name:** [Your Name]
 - **Current Study:** First-year Cybersecurity student
